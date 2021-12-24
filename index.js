@@ -12,6 +12,7 @@ class gameInstance {
     constructor() {
         this.isActive = false;
         this.currentWordInPlay = null;
+        this.arrayOfGuessedLetters = [];
     }
 
     get currentWord() {
@@ -27,6 +28,14 @@ class gameInstance {
 
     set determineWordInPlay(input) {
         this.currentWordInPlay = input;
+    }
+
+    get guessedLetters() {
+        console.log(this.arrayOfGuessedWords);
+    }
+
+    set addLetterToArrayOfGuessedLetters(input) {
+        this.arrayOfGuessedLetters.push(input);
     }
 
 };
