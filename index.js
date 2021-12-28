@@ -31,7 +31,8 @@ class gameInstance {
     }
 
     get guessedLetters() {
-        console.log(this.arrayOfGuessedWords);
+        //console.log(this.arrayOfGuessedLetters);
+        return this.arrayOfGuessedLetters.toString();
     }
 
     set addLetterToArrayOfGuessedLetters(input) {
