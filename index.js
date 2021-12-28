@@ -16,7 +16,6 @@ class gameInstance {
     }
 
     get currentWord() {
-        //console.log(this.currentWordInPlay);
         switch(typeof this.currentWordInPlay == 'string') {
             case true:
             return `The current word in play is ${this.currentWordInPlay}`;
@@ -31,12 +30,18 @@ class gameInstance {
     }
 
     get guessedLetters() {
-        //console.log(this.arrayOfGuessedLetters);
         return this.arrayOfGuessedLetters.toString();
     }
 
     set addLetterToArrayOfGuessedLetters(input) {
-        this.arrayOfGuessedLetters.push(input);
+        switch(this.arrayOfGuessedLetters.includes(input.toUpperCase())) {
+            case true:
+            console.log(`Nice try, that letter has already been played`);
+            return `That letter has been played already, pick another!`;
+            case false:
+            this.arrayOfGuessedLetters.push(input.toUpperCase());
+        }
+        
     }
 
 };
@@ -46,4 +51,7 @@ console.log(newGame.currentWord);
 newGame.determineWordInPlay = 'Smorgasbord';
 console.log(newGame.currentWord);
 newGame.addLetterToArrayOfGuessedLetters = 'L';
+newGame.addLetterToArrayOfGuessedLetters = 'L';
+newGame.addLetterToArrayOfGuessedLetters = 'A';
+newGame.addLetterToArrayOfGuessedLetters = 'g';
 console.log(newGame.guessedLetters);
