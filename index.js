@@ -16,7 +16,7 @@ class gameInstance {
     }
 
     get currentWord() {
-        console.log(this.currentWordInPlay);
+        //console.log(this.currentWordInPlay);
         switch(typeof this.currentWordInPlay == 'string') {
             case true:
             return `The current word in play is ${this.currentWordInPlay}`;
@@ -44,3 +44,5 @@ let newGame = new gameInstance();
 console.log(newGame.currentWord);
 newGame.determineWordInPlay = 'Smorgasbord';
 console.log(newGame.currentWord);
+newGame.addLetterToArrayOfGuessedLetters = 'L';
+console.log(newGame.guessedLetters);
