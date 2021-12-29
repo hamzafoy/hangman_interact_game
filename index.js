@@ -31,11 +31,15 @@ class gameInstance {
             case false:
             return `No word is in play currently!`
         }
-        
     }
 
+    //A setter that takes input and accepts it as the word that is in play.
     set determineWordInPlay(input) {
-        this.currentWordInPlay = input;
+        if (typeof input == 'string') {
+            this.currentWordInPlay = input;
+        } else {
+            throw Error(`This input must be a string!`)
+        }
     }
 
     get guessedLetters() {
