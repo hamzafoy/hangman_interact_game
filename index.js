@@ -10,11 +10,20 @@ guessed during an active game.
 class gameInstance {
 
     constructor() {
+        //Property that reads whether game is in session.
         this.isActive = false;
+        //There are only two players allowed in Hangman.
+        this.positions = ['p1', 'p2']
+        //Tracks who is selecting words for guessing and who is guessing selected word.
+        this.isGuesser = this.positions[0];
+        this.isSelector = this.positions[1];
+        //Property that holds the word that is the subject of the current round.
         this.currentWordInPlay = null;
+        //Property that holds an array of letters that opposite player has guessed.
         this.arrayOfGuessedLetters = [];
     }
 
+    //A getter that checks if there a word in play then returns it.
     get currentWord() {
         switch(typeof this.currentWordInPlay == 'string') {
             case true:
@@ -55,3 +64,4 @@ newGame.addLetterToArrayOfGuessedLetters = 'L';
 newGame.addLetterToArrayOfGuessedLetters = 'A';
 newGame.addLetterToArrayOfGuessedLetters = 'g';
 console.log(newGame.guessedLetters);
+//console.log(newGame.isGuesser);
