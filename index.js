@@ -15,8 +15,8 @@ class gameInstance {
         //There are only two players allowed in Hangman.
         this.positions = ['p1', 'p2']
         //Tracks who is selecting words for guessing and who is guessing selected word.
-        this.isGuesser = this.positions[0];
-        this.isSelector = this.positions[1];
+        this.isGuesser = this.positions[Math.round(Math.random())];
+        this.isSelector = this.positions[(this.isGuesser == 'p1') ? 1 : 0];
         //Property that holds the word that is the subject of the current round.
         this.currentWordInPlay = null;
         //Property that holds an array of letters that opposite player has guessed.
@@ -42,11 +42,14 @@ class gameInstance {
         }
     }
 
+    //A getter that fetches a string composed of letters guessed by player.
     get guessedLetters() {
         return this.arrayOfGuessedLetters.toString();
     }
 
+    //A setter that submits a letter as a player's guess.
     set addLetterToArrayOfGuessedLetters(input) {
+        //This prevents the submission of the same letter twice.
         switch(this.arrayOfGuessedLetters.includes(input.toUpperCase())) {
             case true:
             console.log(`Nice try, that letter has already been played`);
@@ -60,12 +63,11 @@ class gameInstance {
 };
 
 let newGame = new gameInstance();
-console.log(newGame.currentWord);
+//console.log(newGame.currentWord);
 newGame.determineWordInPlay = 'Smorgasbord';
-console.log(newGame.currentWord);
+//console.log(newGame.currentWord);
 newGame.addLetterToArrayOfGuessedLetters = 'L';
 newGame.addLetterToArrayOfGuessedLetters = 'L';
 newGame.addLetterToArrayOfGuessedLetters = 'A';
 newGame.addLetterToArrayOfGuessedLetters = 'g';
-console.log(newGame.guessedLetters);
-//console.log(newGame.isGuesser);
+//console.log(newGame.guessedLetters);
