@@ -23,6 +23,10 @@ class gameInstance {
         this.arrayOfGuessedLetters = [];
     }
 
+    turnOnGame() {
+        this.isActive = !this.isActive;
+    }
+
     //A getter that checks if there a word in play then returns it.
     get currentWord() {
         switch(typeof this.currentWordInPlay == 'string') {
@@ -49,7 +53,7 @@ class gameInstance {
 
     //A setter that submits a letter as a player's guess.
     set addLetterToArrayOfGuessedLetters(input) {
-        //This prevents the submission of the same letter twice.
+        //This prevents the submission of the same letter twice and tests letters based on capitalized versions.
         switch(this.arrayOfGuessedLetters.includes(input.toUpperCase())) {
             case true:
             console.log(`Nice try, that letter has already been played`);
@@ -71,3 +75,6 @@ newGame.addLetterToArrayOfGuessedLetters = 'L';
 newGame.addLetterToArrayOfGuessedLetters = 'A';
 newGame.addLetterToArrayOfGuessedLetters = 'g';
 //console.log(newGame.guessedLetters);
+console.log(newGame.isActive);
+newGame.turnOnGame();
+console.log(newGame.isActive);
