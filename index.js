@@ -5,6 +5,9 @@ variable storing a boolean indicating whether the game is in session
 or not and should have a setter method that sets the word that is being
 guessed during an active game.
 
+UPDATE 20220106: Will first program this to be a terminal app where the
+computer selects a random word from a list and the user has to guess the word.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
 class gameInstance {
