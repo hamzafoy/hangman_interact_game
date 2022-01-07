@@ -10,6 +10,14 @@ computer selects a random word from a list and the user has to guess the word.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
+//Initializing `readline` module allowing for terminal input/output
+
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+})
+
 class gameInstance {
 
     constructor() {
