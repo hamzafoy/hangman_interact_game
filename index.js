@@ -18,6 +18,8 @@ const rl = readline.createInterface({
     output: process.stdout
 })
 
+let playbook = ['stultify', 'amorphous', 'telos', 'inflection', 'tutelage', 'hallow', 'affluence'];
+
 class gameInstance {
 
     constructor() {
@@ -77,10 +79,10 @@ class gameInstance {
 
 };
 
-let newGame = new gameInstance();
 rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
     switch(answer) {
         case 'Y':
+            let newGame = new gameInstance();
             console.log(`Hangman Loa-`);
             rl.close();
             break;
