@@ -78,14 +78,15 @@ class gameInstance {
 };
 
 let newGame = new gameInstance();
-//console.log(newGame.currentWord);
-newGame.determineWordInPlay = 'Smorgasbord';
-//console.log(newGame.currentWord);
-newGame.addLetterToArrayOfGuessedLetters = 'L';
-newGame.addLetterToArrayOfGuessedLetters = 'L';
-newGame.addLetterToArrayOfGuessedLetters = 'A';
-newGame.addLetterToArrayOfGuessedLetters = 'g';
-//console.log(newGame.guessedLetters);
-console.log(newGame.isActive);
-newGame.turnOnGame();
-console.log(newGame.isActive);
+rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
+    switch(answer) {
+        case 'Y':
+            console.log(`Hangman Loa-`);
+            rl.close();
+            break;
+        case 'N':
+            console.log('Terminal closing, goodbye!');
+            rl.close();
+            break;
+    }
+})
