@@ -88,7 +88,7 @@ rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
         case 'N':
             console.log('Terminal closing, goodbye!');
             rl.close();
-            break;
+            return;
     }
     rl.question('Input a letter you wish to guess: ', (answer) => {
         console.log(`You guessed ${answer}`);
