@@ -83,12 +83,15 @@ rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
     switch(answer) {
         case 'Y':
             let newGame = new gameInstance();
-            console.log(`Hangman Loa-`);
-            rl.close();
+            console.log(`Hangman Loading`);
             break;
         case 'N':
             console.log('Terminal closing, goodbye!');
             rl.close();
             break;
     }
+    rl.question('Input a letter you wish to guess: ', (answer) => {
+        console.log(`You guessed ${answer}`);
+        rl.close();
+    })
 })
