@@ -115,10 +115,14 @@ rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
             switch(newGame.currentWordInPlay.includes(lowerCasedLetter)) {
                 case true:
                     console.log(`Yes! There is a(n) ${lowerCasedLetter} in the word!`);
+                    newGame.addLetterToArrayOfGuessedLetters = lowerCasedLetter;
+                    console.log(`You have guessed the following letters so far: ${newGame.guessedLetters}`)
                     break;
                 case false:
                     console.log(`So sorry, ${lowerCasedLetter} is not found in the word.`);
                     newGame.addPartToBody();
+                    newGame.addLetterToArrayOfGuessedLetters = lowerCasedLetter;
+                    console.log(`You have guessed the following letters so far: ${newGame.guessedLetters}`)
                     console.log(newGame.bodyPartCountForLoss);
             }
             recursiveAsyncReadLine(); //Calling this function again to ask new question
