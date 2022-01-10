@@ -32,12 +32,18 @@ class gameInstance {
         this.isSelector = this.positions[(this.isGuesser == 'p1') ? 1 : 0];
         //Property that holds the word that is the subject of the current round.
         this.currentWordInPlay = null;
+        this.currentWordUnderscores = null;
+        this.bodyPartCountForLoss = 0;
         //Property that holds an array of letters that opposite player has guessed.
         this.arrayOfGuessedLetters = [];
     }
 
     turnOnGame() {
         this.isActive = !this.isActive;
+    }
+
+    addPartToBody() {
+        this.bodyPartCountForLoss++;
     }
 
     //A getter that checks if there a word in play then returns it.
@@ -53,7 +59,7 @@ class gameInstance {
     //A setter that takes input and accepts it as the word that is in play.
     set determineWordInPlay(input) {
         if (typeof input == 'string') {
-            this.currentWordInPlay = input;
+            this.currentWordInPlay = input.toLowerCase();
         } else {
             throw Error(`This input must be a string!`)
         }
@@ -80,9 +86,12 @@ class gameInstance {
 };
 
 rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
+    let newGame = new gameInstance();
+    newGame.addPartToBody();
+    newGame.addPartToBody();
+    console.log(newGame.bodyPartCountForLoss);
     switch(answer) {
         case 'Y':
-            let newGame = new gameInstance();
             console.log(`Hangman Loading`);
             let randomNum = Math.floor(Math.random() * (playbook.length - 0) + 0);
             newGame.determineWordInPlay = playbook[randomNum];
@@ -93,8 +102,18 @@ rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
             rl.close();
             return;
     }
-    rl.question('Input a letter you wish to guess: ', (answer) => {
-        console.log(`You guessed ${answer}`);
+
+    /* rl.question('Input a letter you wish to guess: ', (answer) => {
+        let lowerCasedLetter = answer.toLowerCase();
+        console.log(`You guessed ${lowerCasedLetter}`);
+        switch(newGame.currentWord.includes(lowerCasedLetter)) {
+            case true:
+                console.log(`Yes! There is a(n) ${lowerCasedLetter} in the word!`);
+                break;
+            case false:
+                console.log(`So sorry, ${lowerCasedLetter} is not found in the word.`);
+                break;
+        }
         rl.close();
-    })
+    }) */
 })
