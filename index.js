@@ -84,6 +84,9 @@ rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
         case 'Y':
             let newGame = new gameInstance();
             console.log(`Hangman Loading`);
+            let randomNum = Math.floor(Math.random() * (playbook.length - 0) + 0);
+            newGame.determineWordInPlay = playbook[randomNum];
+            console.log(newGame.currentWord);
             break;
         case 'N':
             console.log('Terminal closing, goodbye!');
