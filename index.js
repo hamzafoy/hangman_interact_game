@@ -87,11 +87,10 @@ class gameInstance {
 
 };
 
+
+
 rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
     let newGame = new gameInstance();
-    newGame.addPartToBody();
-    newGame.addPartToBody();
-    console.log(newGame.bodyPartCountForLoss);
     switch(answer) {
         case 'Y':
             console.log(`Hangman Loading`);
@@ -105,6 +104,28 @@ rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
             return;
     }
 
+    const recursiveAsyncReadLine = function () {
+        rl.question('Input a letter you wish to guess: ', function(answer) {
+            let lowerCasedLetter = answer.toLowerCase();
+            console.log(`You guessed ${lowerCasedLetter}`);
+            if (newGame.bodyPartCountForLoss == 6) {
+                return rl.close();
+            }
+            console.log(newGame.currentWordInPlay.includes(lowerCasedLetter));
+            switch(newGame.currentWordInPlay.includes(lowerCasedLetter)) {
+                case true:
+                    console.log(`Yes! There is a(n) ${lowerCasedLetter} in the word!`);
+                    break;
+                case false:
+                    console.log(`So sorry, ${lowerCasedLetter} is not found in the word.`);
+                    newGame.addPartToBody();
+                    console.log(newGame.bodyPartCountForLoss);
+            }
+            recursiveAsyncReadLine(); //Calling this function again to ask new question
+        });
+    };
+
+    recursiveAsyncReadLine();
     /* rl.question('Input a letter you wish to guess: ', (answer) => {
         let lowerCasedLetter = answer.toLowerCase();
         console.log(`You guessed ${lowerCasedLetter}`);
