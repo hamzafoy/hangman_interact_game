@@ -32,7 +32,9 @@ class gameInstance {
         this.isSelector = this.positions[(this.isGuesser == 'p1') ? 1 : 0];
         //Property that holds the word that is the subject of the current round.
         this.currentWordInPlay = null;
+        //Property that holds an array of underscores for each letter in the word in play.
         this.currentWordUnderscores = null;
+        //"Body parts" are traditionally the way, visually, to count the number of chances a player has to guess the word before losing.
         this.bodyPartCountForLoss = 0;
         //Property that holds an array of letters that opposite player has guessed.
         this.arrayOfGuessedLetters = [];
