@@ -48,10 +48,20 @@ class gameInstance {
         this.bodyPartCountForLoss++;
     }
 
+    exchangeUnderscoreForCorrectLetter(input) {
+        let indices = [];
+        let idx = this.currentWordInPlay.split('').indexOf(input);
+        while (idx != -1) {
+        indices.push(idx);
+        idx = this.currentWordInPlay.split('').indexOf(input, idx + 1);
+        indices.forEach(element => this.currentWordUnderscores[element] = input)
+        }
+    }
+
     renderWordToUnderscores() {
         let wordArray = this.currentWordInPlay.split('');
         let underscoreArray = [...Array(wordArray.length).fill('_', 0, wordArray.length)];
-        this.currentWordUnderscores = underscoreArray.join('');
+        this.currentWordUnderscores = underscoreArray;
     }
 
     //A getter that checks if there a word in play then returns it.
@@ -104,7 +114,6 @@ rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
             newGame.determineWordInPlay = playbook[randomNum];
             newGame.renderWordToUnderscores();
             console.log(newGame.currentWord);
-            console.log(newGame.currentWordUnderscores)
             break;
         case 'N':
             console.log('Terminal closing, goodbye!');
@@ -113,18 +122,20 @@ rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
     }
 
     const recursiveAsyncReadLine = function () {
+        console.log(newGame.currentWordUnderscores.join(''))
         rl.question('Input a letter you wish to guess: ', function(answer) {
             let lowerCasedLetter = answer.toLowerCase();
-            console.log(`You guessed ${lowerCasedLetter}`);
+            //console.log(`You guessed ${lowerCasedLetter}`);
             //console.log(newGame.currentWordInPlay.includes(lowerCasedLetter));
             switch(newGame.currentWordInPlay.includes(lowerCasedLetter)) {
                 case true:
-                    console.log(`Yes! There is a(n) ${lowerCasedLetter} in the word!`);
+                    //console.log(`Yes! There is a(n) ${lowerCasedLetter} in the word!`);
                     newGame.addLetterToArrayOfGuessedLetters = lowerCasedLetter;
+                    newGame.exchangeUnderscoreForCorrectLetter(lowerCasedLetter);
                     console.log(`You have guessed the following letters so far: ${newGame.guessedLetters}`)
                     break;
                 case false:
-                    console.log(`So sorry, ${lowerCasedLetter} is not found in the word.`);
+                    //console.log(`So sorry, ${lowerCasedLetter} is not found in the word.`);
                     newGame.addPartToBody();
                     newGame.addLetterToArrayOfGuessedLetters = lowerCasedLetter;
                     console.log(`You have guessed the following letters so far: ${newGame.guessedLetters}`)
