@@ -48,6 +48,12 @@ class gameInstance {
         this.bodyPartCountForLoss++;
     }
 
+    renderWordToUnderscores() {
+        let wordArray = this.currentWordInPlay.split('');
+        let underscoreArray = [...Array(wordArray.length).fill('_', 0, wordArray.length)];
+        this.currentWordUnderscores = underscoreArray.join('');
+    }
+
     //A getter that checks if there a word in play then returns it.
     get currentWord() {
         switch(typeof this.currentWordInPlay == 'string') {
@@ -96,7 +102,9 @@ rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
             console.log(`Hangman Loading`);
             let randomNum = Math.floor(Math.random() * (playbook.length - 0) + 0);
             newGame.determineWordInPlay = playbook[randomNum];
+            newGame.renderWordToUnderscores();
             console.log(newGame.currentWord);
+            console.log(newGame.currentWordUnderscores)
             break;
         case 'N':
             console.log('Terminal closing, goodbye!');
@@ -108,10 +116,7 @@ rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
         rl.question('Input a letter you wish to guess: ', function(answer) {
             let lowerCasedLetter = answer.toLowerCase();
             console.log(`You guessed ${lowerCasedLetter}`);
-            if (newGame.bodyPartCountForLoss == 6) {
-                return rl.close();
-            }
-            console.log(newGame.currentWordInPlay.includes(lowerCasedLetter));
+            //console.log(newGame.currentWordInPlay.includes(lowerCasedLetter));
             switch(newGame.currentWordInPlay.includes(lowerCasedLetter)) {
                 case true:
                     console.log(`Yes! There is a(n) ${lowerCasedLetter} in the word!`);
@@ -123,7 +128,11 @@ rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
                     newGame.addPartToBody();
                     newGame.addLetterToArrayOfGuessedLetters = lowerCasedLetter;
                     console.log(`You have guessed the following letters so far: ${newGame.guessedLetters}`)
-                    console.log(newGame.bodyPartCountForLoss);
+                    //console.log(newGame.bodyPartCountForLoss);
+                    if (newGame.bodyPartCountForLoss == 6) {
+                        console.log(`You have used up all of your guesses, game ending!`)
+                        return rl.close();
+                    }
             }
             recursiveAsyncReadLine(); //Calling this function again to ask new question
         });
