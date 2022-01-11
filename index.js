@@ -11,15 +11,16 @@ computer selects a random word from a list and the user has to guess the word.
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
 //Initializing `readline` module allowing for terminal input/output
-
 const readline = require('readline');
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 })
 
+
 //This is a temporary list of words which will be selected from randomly by the terminal in the terminal-based version of the Hangman game.
 let playbook = ['stultify', 'amorphous', 'telos', 'inflection', 'tutelage', 'hallow', 'affluence', 'forelock', 'onomatopoeia', 'rectitude', 'ontology', 'phonetics', 'feldspar'];
+
 
 class gameInstance {
 
@@ -41,15 +42,19 @@ class gameInstance {
         this.arrayOfGuessedLetters = [];
     }
 
+    //This method switches the game 'on' and 'off'.
     turnOnGame() {
         this.isActive = !this.isActive;
     }
 
+    //This method increments the counter of 'body parts' which serves as a way to track how many guesses a player has left before losing the round.
     addPartToBody() {
         this.bodyPartCountForLoss++;
     }
 
+    //This method swaps out underscores for correct letters to be displayed in the terminal to show players their progress towards guessing the entire word in play.
     exchangeUnderscoreForCorrectLetter(input) {
+        //The while loop and `indices` array allows for .indexOf Array method to be used to find multiples of the same letter.
         let indices = [];
         let idx = this.currentWordInPlay.split('').indexOf(input);
         while (idx != -1) {
@@ -59,9 +64,13 @@ class gameInstance {
         }
     }
 
+    //This method takes the currentWordInPlay and creates an array of underscores matching the number of letters in said currentWordInPlay.
     renderWordToUnderscores() {
+        //Splits the current word into an Array.
         let wordArray = this.currentWordInPlay.split('');
+        //Creates new Array using the `spread` operator and fills it with underscores equal in amount to the letters found in the word in play.
         let underscoreArray = [...Array(wordArray.length).fill('_', 0, wordArray.length)];
+        //Stores the array of underscores in the gameInstance Object.
         this.currentWordUnderscores = underscoreArray;
     }
 
