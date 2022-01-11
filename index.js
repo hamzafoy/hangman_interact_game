@@ -93,10 +93,12 @@ class gameInstance {
         //This prevents the submission of the same letter twice and tests letters based on capitalized versions.
         switch(this.arrayOfGuessedLetters.includes(input.toUpperCase())) {
             case true:
-            console.log(`Nice try, that letter has already been played`);
-            return `That letter has been played already, pick another!`;
+                console.log(this.arrayOfGuessedLetters);
+                console.log(`Nice try, that letter has already been played`);
+                break;
             case false:
-            this.arrayOfGuessedLetters.push(input.toUpperCase());
+                this.arrayOfGuessedLetters.push(input.toUpperCase());
+                break;
         }
         
     }
@@ -138,7 +140,10 @@ rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
                             newGame.addLetterToArrayOfGuessedLetters = lowerCasedLetter;
                             newGame.exchangeUnderscoreForCorrectLetter(lowerCasedLetter);
                             //console.log(`You have guessed the following letters so far: ${newGame.guessedLetters}`)
-                            break;
+                            if (newGame.currentWordUnderscores.includes("_") == -1) {
+                                console.log(`You have won and guessed ${newGame.currentWordInPlay}`);
+                                return rl.close();
+                            }
                         case false:
                             //console.log(`So sorry, ${lowerCasedLetter} is not found in the word.`);
                             newGame.addPartToBody();
