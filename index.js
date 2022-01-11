@@ -18,19 +18,20 @@ const rl = readline.createInterface({
     output: process.stdout
 })
 
+//This is a temporary list of words which will be selected from randomly by the terminal in the terminal-based version of the Hangman game.
 let playbook = ['stultify', 'amorphous', 'telos', 'inflection', 'tutelage', 'hallow', 'affluence', 'forelock', 'onomatopoeia', 'rectitude', 'ontology', 'phonetics', 'feldspar'];
 
 class gameInstance {
 
     constructor() {
-        //Property that reads whether game is in session.
+        //Property that reads whether game is in session. This is kept for the gameInstance object when it will be ported to a browser-based game.
         this.isActive = false;
-        //There are only two players allowed in Hangman.
+        //There are only two players allowed in Hangman. This is kept for the gameInstance object when it will be ported to a browser-based game.
         this.positions = ['p1', 'p2']
-        //Tracks who is selecting words for guessing and who is guessing selected word.
+        //Tracks who is selecting words for guessing and who is guessing selected word. This is kept for the gameInstance object when it will be ported to a browser-based game.
         this.isGuesser = this.positions[Math.round(Math.random())];
         this.isSelector = this.positions[(this.isGuesser == 'p1') ? 1 : 0];
-        //Property that holds the word that is the subject of the current round.
+        //Property that holds the word that is the subject of the current game round.
         this.currentWordInPlay = null;
         //Property that holds an array of underscores for each letter in the word in play.
         this.currentWordUnderscores = null;
