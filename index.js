@@ -118,14 +118,15 @@ class gameInstance {
 
 
 rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
+    //Initial question will continue with game initialization if Y is answered, will close the terminal input process if N is answered.
     let newGame = new gameInstance();
     switch(answer) {
         case 'Y':
-            //console.log(`Hangman Loading`);
+            //Selecting a random word from the playbook variable and storing it in the gameInstance Object.
             let randomNum = Math.floor(Math.random() * (playbook.length - 0) + 0);
             newGame.determineWordInPlay = playbook[randomNum];
+            //Creating an Array of underscores whose number matches the number of letters found in the word that is in play.
             newGame.renderWordToUnderscores();
-            //console.log(newGame.currentWord);
             break;
         case 'N':
             console.log('Terminal closing, goodbye!');
@@ -133,34 +134,36 @@ rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
             return;
     }
 
+    //Initializing the recursive function and storing it in a `const` variable.
     const recursiveAsyncReadLine = function () {
-        console.log(newGame.currentWordUnderscores.join(''))
         rl.question('Input a letter you wish to guess, or type "guesses" to see which letters you have already played: ', function(answer) {
+            //Checks user input to see whether user wants to check the number of guesses they have or whether they want to play a letter.
             switch(answer == 'guesses') {
                 case true:
-                    console.log(`You have guessed the following letters so far: ${newGame.guessedLetters}`)
-                    console.log(newGame.currentWordInPlay);
-                    console.log(newGame.bodyPartCountForLoss);
-                    console.log(newGame.arrayOfGuessedLetters);
+                    console.log(`You have guessed the following letters so far: ${newGame.guessedLetters}`);
                     break;
                 case false:
                     let lowerCasedLetter = answer.toLowerCase();
                     //console.log(`You guessed ${lowerCasedLetter}`);
-                    console.log(newGame.currentWordInPlay.includes(lowerCasedLetter));
+                    //console.log(newGame.currentWordInPlay.includes(lowerCasedLetter));
                     if(newGame.currentWordInPlay.includes(lowerCasedLetter)) {
+                        
                         //console.log(`Yes! There is a(n) ${lowerCasedLetter} in the word!`);
                         newGame.addLetterToArrayOfGuessedLetters = lowerCasedLetter;
                         newGame.exchangeUnderscoreForCorrectLetter(lowerCasedLetter);
+                        console.log(newGame.currentWordUnderscores.join(''));
                         //console.log(`You have guessed the following letters so far: ${newGame.guessedLetters}`)
-                        console.log(newGame.currentWordUnderscores);
+                        //console.log(newGame.currentWordUnderscores);
                         if (newGame.currentWordUnderscores.includes("_") == false) {
                             console.log(`You have won and guessed ${newGame.currentWordInPlay}`);
                             return rl.close();
                         }
                     } else {
+                        
                         //console.log(`So sorry, ${lowerCasedLetter} is not found in the word.`);
                         newGame.addPartToBody();
                         newGame.addLetterToArrayOfGuessedLetters = lowerCasedLetter;
+                        console.log(newGame.currentWordUnderscores.join(''));
                         //console.log(`You have guessed the following letters so far: ${newGame.guessedLetters}`)
                         //console.log(newGame.bodyPartCountForLoss);
                         if (newGame.bodyPartCountForLoss == 6) { //What will break the infinite recursive loop is whether the player uses up all of his/her guesses without finding the full word.
@@ -171,21 +174,10 @@ rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
             }
             
             recursiveAsyncReadLine(); //Calling this function again to ask new question
+
         });
     };
 
     recursiveAsyncReadLine();
-    /* rl.question('Input a letter you wish to guess: ', (answer) => {
-        let lowerCasedLetter = answer.toLowerCase();
-        console.log(`You guessed ${lowerCasedLetter}`);
-        switch(newGame.currentWord.includes(lowerCasedLetter)) {
-            case true:
-                console.log(`Yes! There is a(n) ${lowerCasedLetter} in the word!`);
-                break;
-            case false:
-                console.log(`So sorry, ${lowerCasedLetter} is not found in the word.`);
-                break;
-        }
-        rl.close();
-    }) */
-})
+
+});
