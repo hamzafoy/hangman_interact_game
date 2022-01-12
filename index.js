@@ -148,24 +148,21 @@ rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
                     //console.log(newGame.currentWordInPlay.includes(lowerCasedLetter));
                     if(newGame.currentWordInPlay.includes(lowerCasedLetter)) {
                         
-                        //console.log(`Yes! There is a(n) ${lowerCasedLetter} in the word!`);
+                        console.log(`Yes! There is a(n) ${lowerCasedLetter} in the word!`);
                         newGame.addLetterToArrayOfGuessedLetters = lowerCasedLetter;
                         newGame.exchangeUnderscoreForCorrectLetter(lowerCasedLetter);
                         console.log(newGame.currentWordUnderscores.join(''));
-                        //console.log(`You have guessed the following letters so far: ${newGame.guessedLetters}`)
-                        //console.log(newGame.currentWordUnderscores);
+                        //Win condition is met when there are no more underscores stored in currentWordUnderscores in the gameInstance Object. Triggers a message and closes the terminal input process.
                         if (newGame.currentWordUnderscores.includes("_") == false) {
                             console.log(`You have won and guessed ${newGame.currentWordInPlay}`);
                             return rl.close();
                         }
                     } else {
                         
-                        //console.log(`So sorry, ${lowerCasedLetter} is not found in the word.`);
+                        console.log(`So sorry, ${lowerCasedLetter} is not found in the word.`);
                         newGame.addPartToBody();
                         newGame.addLetterToArrayOfGuessedLetters = lowerCasedLetter;
                         console.log(newGame.currentWordUnderscores.join(''));
-                        //console.log(`You have guessed the following letters so far: ${newGame.guessedLetters}`)
-                        //console.log(newGame.bodyPartCountForLoss);
                         if (newGame.bodyPartCountForLoss == 6) { //What will break the infinite recursive loop is whether the player uses up all of his/her guesses without finding the full word.
                             console.log(`You have used up all of your guesses, game ending!`)
                             return rl.close();
