@@ -164,7 +164,7 @@ rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
                         newGame.addLetterToArrayOfGuessedLetters = lowerCasedLetter;
                         console.log(newGame.currentWordUnderscores.join(''));
                         if (newGame.bodyPartCountForLoss == 6) { //What will break the infinite recursive loop is whether the player uses up all of his/her guesses without finding the full word.
-                            console.log(`You have used up all of your guesses, game ending!`)
+                            console.log(`You have used up all of your guesses, the correct word was ${gameInstance.currentWordInPlay} - game ending!`)
                             return rl.close();
                         }
                     }
