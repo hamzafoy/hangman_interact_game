@@ -140,7 +140,7 @@ rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
             //Checks user input to see whether user wants to check the number of guesses they have or whether they want to play a letter.
             switch(answer == 'guesses') {
                 case true:
-                    console.log(`You have guessed the following letters so far: ${newGame.guessedLetters}`);
+                    console.log(`You have guessed ${newGame.arrayOfGuessedLetters.length} letter(s) so far: ${newGame.guessedLetters}`);
                     break;
                 case false:
                     let lowerCasedLetter = answer.toLowerCase();
