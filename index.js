@@ -120,7 +120,7 @@ class gameInstance {
 rl.question('Do you want to play Hangman in the Terminal - Y/N? ', (answer) => {
     //Initial question will continue with game initialization if Y is answered, will close the terminal input process if N is answered.
     let newGame = new gameInstance();
-    switch(answer) {
+    switch(answer.toUpperCase()) {
         case 'Y':
             //Selecting a random word from the playbook variable and storing it in the gameInstance Object.
             let randomNum = Math.floor(Math.random() * (playbook.length - 0) + 0);
